@@ -2,6 +2,7 @@ import React from "react";
 
 type QuestionPropsType = {
     question: string
+    questionID:string
 }
 
 export const Question = (props:QuestionPropsType) => {

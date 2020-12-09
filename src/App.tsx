@@ -25,7 +25,7 @@ function App() {
     const secondQuestionID = v1()
     const thirdQuestionID = v1()
 
-    const [question, setQuestions] = useState<Array<QuestionType>>([
+    const [questions, setQuestions] = useState<Array<QuestionType>>([
         {id: firstQuestionID, title: 'Что такое React'},
         {id: secondQuestionID, title: 'Почему мы используем React'},
         {id: thirdQuestionID, title: 'Что такое Virtual Dom'}
@@ -70,14 +70,16 @@ function App() {
 
     })
 
+    const titleForQuestion = questions.map(el => el.title).toString()
 
 
     return <div className={'wrapper'}>
         <div className={'container'}>
-            <Question question={question[0].title} />
+            <Question question={titleForQuestion}  questionID={''}/>
             <Answer answer={state[firstQuestionID]} />
         </div>
     </div>
+
 }
 
 export default App;
