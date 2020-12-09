@@ -15,7 +15,7 @@ export type AnswerType = {
     isRight: boolean
 }
 
-type StateType = {
+export type StateType = {
     [key: string]: Array<AnswerType>
 }
 
@@ -24,6 +24,10 @@ function App() {
     const firstQuestionID = v1()
     const secondQuestionID = v1()
     const thirdQuestionID = v1()
+
+
+
+    const [currentQuestion, setCurrentQuestion] = useState(1)
 
     const [questions, setQuestions] = useState<Array<QuestionType>>([
         {id: firstQuestionID, title: 'Что такое React'  },
@@ -34,7 +38,7 @@ function App() {
     const [state, setState] = useState<StateType>({
         [firstQuestionID]: [
             {
-                id: v1(),
+                id: firstQuestionID,
                 answer: 'Это декларативная, эффективная и гибкая JavaScript библиотека для создания пользовательских интерфейсов.',
                 isRight: true
             },
@@ -47,7 +51,7 @@ function App() {
                 answer: 'Так как нет других варинатов',
                 isRight: false
             },
-            {id: v1(), answer: 'Из-за скорости работы ,благодаря Virtual Dom', isRight: true},
+            {id:secondQuestionID, answer: 'Из-за скорости работы ,благодаря Virtual Dom', isRight: true},
             {id: v1(), answer: 'Больше платят и он на хайпе', isRight: false},
         ],
         [thirdQuestionID]: [
@@ -62,7 +66,7 @@ function App() {
                 isRight: false
             },
             {
-                id: v1(),
+                id: thirdQuestionID,
                 answer: "это техника и набор библиотек / алгоритмов, которые позволяют нам улучшить производительность на клиентской стороне",
                 isRight: true
             },
@@ -70,22 +74,22 @@ function App() {
 
     })
 
-    const titleForQuestion = questions.map(el => el.title)
-    const allQuestionsID = questions.map(el=> el.id).toString()
+    console.log(state[firstQuestionID])
 
+    const titleForQuestion = questions.map(el => el.title)
 
     const changeAnswerAndQuestion = (questionID: string, answerID: string, isRight: boolean) => {
         debugger
         let question = state[questionID].find(f => f.id === answerID)
         if (question && question.isRight === isRight) {
-
+            setQuestions([ {id: firstQuestionID, title: 'Почему мы используем React'},])
         }
     }
 
     return <div className={'wrapper'}>
         <div className={'container'}>
-            <Question question={titleForQuestion[0]} questionID={firstQuestionID}/>
-            <Answer answer={state[firstQuestionID]} questionID={allQuestionsID} changeAnswerAndQuestion={changeAnswerAndQuestion}/>
+            <Question question={titleForQuestion[currentQuestion]}  />
+            <Answer answer={state} questionID={firstQuestionID} changeAnswerAndQuestion={changeAnswerAndQuestion}/>
         </div>
     </div>
 
