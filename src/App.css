@@ -43,4 +43,10 @@ li{
     border: 4px solid #5ceadd;;
     padding: 10px 5px;
     border-radius: 10px;
+    max-width: 400px;
+}
+
+.answers li:hover{
+    cursor: pointer;
+    background: #81ffdc;
 }

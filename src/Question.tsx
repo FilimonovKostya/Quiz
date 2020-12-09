@@ -1,8 +1,12 @@
 import React from "react";
 
-export const Question = () => {
+type QuestionPropsType = {
+    question: string
+}
+
+export const Question = (props:QuestionPropsType) => {
     return <div className={'questionContainer'}>
         <h1>Question</h1>
-        <p>Why we use React and Why?</p>
+        <h2>{props.question} ? </h2>
     </div>
 }
