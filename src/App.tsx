@@ -27,7 +27,7 @@ function App() {
 
 
 
-    const [currentQuestion, setCurrentQuestion] = useState(1)
+    const [currentQuestion, setCurrentQuestion] = useState(0)
 
     const [questions, setQuestions] = useState<Array<QuestionType>>([
         {id: firstQuestionID, title: 'Что такое React'  },
@@ -74,22 +74,22 @@ function App() {
 
     })
 
-    console.log(state[firstQuestionID])
 
     const titleForQuestion = questions.map(el => el.title)
+    const answersID = questions.map(el=> el.id)
 
     const changeAnswerAndQuestion = (questionID: string, answerID: string, isRight: boolean) => {
         debugger
         let question = state[questionID].find(f => f.id === answerID)
         if (question && question.isRight === isRight) {
-            setQuestions([ {id: firstQuestionID, title: 'Почему мы используем React'},])
+            setCurrentQuestion(currentQuestion + 1)
         }
     }
 
     return <div className={'wrapper'}>
         <div className={'container'}>
             <Question question={titleForQuestion[currentQuestion]}  />
-            <Answer answer={state} questionID={firstQuestionID} changeAnswerAndQuestion={changeAnswerAndQuestion}/>
+            <Answer answer={state} questionsID={answersID[currentQuestion]} changeAnswerAndQuestion={changeAnswerAndQuestion}/>
         </div>
     </div>
 
