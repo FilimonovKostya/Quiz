@@ -81,8 +81,10 @@ function App() {
     const changeAnswerAndQuestion = (questionID: string, answerID: string, isRight: boolean) => {
         debugger
         let question = state[questionID].find(f => f.id === answerID)
-        if (question && question.isRight === isRight) {
+        if (question && question.id === questionID) {
             setCurrentQuestion(currentQuestion + 1)
+        } else {
+            alert('Не правильный')
         }
     }
 
