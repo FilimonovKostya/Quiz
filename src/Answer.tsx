@@ -3,6 +3,8 @@ import {AnswerType} from "./App";
 
 type AnswerPropsType = {
     answer: Array<AnswerType>
+    questionID: string
+    changeAnswerAndQuestion: (questionID: string, answerID: string, isRight: boolean) => void
 }
 
 export const Answer = (props: AnswerPropsType) => {
@@ -11,7 +13,7 @@ export const Answer = (props: AnswerPropsType) => {
             {
                 props.answer.map((el, index) => {
 
-                    return <li key={index} > {el.answer} </li>
+                    return <li key={index} onClick={() => props.changeAnswerAndQuestion(props.questionID, el.id, el.isRight)}> {el.answer} </li>
                 })
             }
         </ul>
