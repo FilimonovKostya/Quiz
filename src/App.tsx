@@ -89,11 +89,13 @@ function App() {
             if (question && question.id === questionID) {
                 setCurrentQuestion(currentQuestion + 1)
                 setRightAnswer(rightAnswer + 1)
+                setRight('')
             } else {
                 setCurrentQuestion(currentQuestion + 1)
+                setWrong('')
             }
-            setRight('')
-            setWrong('')
+
+
         }, 1500)
 
     }

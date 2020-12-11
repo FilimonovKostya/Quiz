@@ -29,7 +29,7 @@ export const Answer = (props: AnswerPropsType) => {
                             props.setWrong('wrong')
                         }
                     }
-                    return <li key={index} className={el.isRight ? props.right : props.wrong} onClick={onClickHandler}> {el.answer} </li>
+                    return <li key={index} className={el.isRight ? props.right : ''} onClick={onClickHandler}> {el.answer} </li>
                 })
             }
         </ul>
