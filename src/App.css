@@ -48,5 +48,13 @@ li{
 
 .answers li:hover{
     cursor: pointer;
-    background: #81ffdc;
+    /*background: #81ffdc;*/
+}
+
+.right{
+    background: gold;
+}
+
+.wrong{
+    background: red;
 }

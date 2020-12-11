@@ -26,11 +26,15 @@ function App() {
     const thirdQuestionID = v1()
 
 
+    const [right, setRight] = useState('')
+    const [wrong, setWrong] = useState('')
 
     const [currentQuestion, setCurrentQuestion] = useState(0)
 
+    const [rightAnswer, setRightAnswer] = useState(0)
+
     const [questions, setQuestions] = useState<Array<QuestionType>>([
-        {id: firstQuestionID, title: 'Что такое React'  },
+        {id: firstQuestionID, title: 'Что такое React'},
         {id: secondQuestionID, title: 'Почему мы используем React'},
         {id: thirdQuestionID, title: 'Что такое Virtual Dom'}
     ])
@@ -51,7 +55,7 @@ function App() {
                 answer: 'Так как нет других варинатов',
                 isRight: false
             },
-            {id:secondQuestionID, answer: 'Из-за скорости работы ,благодаря Virtual Dom', isRight: true},
+            {id: secondQuestionID, answer: 'Из-за скорости работы ,благодаря Virtual Dom', isRight: true},
             {id: v1(), answer: 'Больше платят и он на хайпе', isRight: false},
         ],
         [thirdQuestionID]: [
@@ -76,22 +80,42 @@ function App() {
 
 
     const titleForQuestion = questions.map(el => el.title)
-    const answersID = questions.map(el=> el.id)
+    const answersID = questions.map(el => el.id)
 
-    const changeAnswerAndQuestion = (questionID: string, answerID: string, isRight: boolean) => {
-        debugger
+    const changeAnswerAndQuestion = (questionID: string, answerID: string) => {
+
         let question = state[questionID].find(f => f.id === answerID)
-        if (question && question.id === questionID) {
-            setCurrentQuestion(currentQuestion + 1)
-        } else {
-            alert('Не правильный')
-        }
+        setTimeout(() => {
+            if (question && question.id === questionID) {
+                setCurrentQuestion(currentQuestion + 1)
+                setRightAnswer(rightAnswer + 1)
+            } else {
+                alert('Не правильный')
+            }
+            setRight('')
+            setWrong('')
+        }, 1500)
+
     }
+
+    console.log(rightAnswer)
 
     return <div className={'wrapper'}>
         <div className={'container'}>
-            <Question question={titleForQuestion[currentQuestion]}  />
-            <Answer answer={state} questionsID={answersID[currentQuestion]} changeAnswerAndQuestion={changeAnswerAndQuestion}/>
+            {
+                questions.length > currentQuestion
+                    ? <React.Fragment>
+                        <Question question={titleForQuestion[currentQuestion]}/>
+                        <Answer answer={state} questionsID={answersID[currentQuestion]}
+                                changeAnswerAndQuestion={changeAnswerAndQuestion}
+                                setRight={setRight} setWrong={setWrong}
+                                right={right} wrong={wrong}
+                        />
+                    </React.Fragment>
+                    : <div>{rightAnswer}</div>
+            }
+
+
         </div>
     </div>
 
