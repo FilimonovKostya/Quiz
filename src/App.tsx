@@ -90,7 +90,7 @@ function App() {
                 setCurrentQuestion(currentQuestion + 1)
                 setRightAnswer(rightAnswer + 1)
             } else {
-                alert('Не правильный')
+                setCurrentQuestion(currentQuestion + 1)
             }
             setRight('')
             setWrong('')
