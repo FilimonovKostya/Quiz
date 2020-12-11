@@ -3,6 +3,7 @@ import {Answer} from './Answer';
 import './App.css';
 import {Question} from './Question';
 import {v1} from "uuid";
+import {CircularProgress, Paper} from "@material-ui/core";
 
 type QuestionType = {
     id: string
@@ -28,6 +29,7 @@ function App() {
 
     const [right, setRight] = useState('')
     const [wrong, setWrong] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const [currentQuestion, setCurrentQuestion] = useState(0)
 
@@ -90,13 +92,15 @@ function App() {
                 setCurrentQuestion(currentQuestion + 1)
                 setRightAnswer(rightAnswer + 1)
                 setRight('')
+                // setLoading(true)
             } else {
                 setCurrentQuestion(currentQuestion + 1)
                 setWrong('')
+                // setLoading(true)
             }
+            setLoading(false)
 
-
-        }, 1500)
+        }, 1000)
 
     }
 
@@ -107,16 +111,23 @@ function App() {
             {
                 questions.length > currentQuestion
                     ? <React.Fragment>
+
                         <Question question={titleForQuestion[currentQuestion]}/>
-                        <Answer answer={state} questionsID={answersID[currentQuestion]}
-                                changeAnswerAndQuestion={changeAnswerAndQuestion}
-                                setRight={setRight} setWrong={setWrong}
-                                right={right} wrong={wrong}
-                        />
+                        {loading ?
+                            <CircularProgress/>
+                            : <Answer answer={state} questionsID={answersID[currentQuestion]}
+                                      changeAnswerAndQuestion={changeAnswerAndQuestion}
+                                      setRight={setRight} setWrong={setWrong}
+                                      right={right} wrong={wrong}
+                                      setLoading={setLoading}
+                            />
+
+
+                        }
+
                     </React.Fragment>
                     : <div>{rightAnswer}</div>
             }
-
 
         </div>
     </div>
