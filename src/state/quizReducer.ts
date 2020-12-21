@@ -75,6 +75,10 @@ const initialState:InitialStateType[] = [
 ]
 
 
-export const quizReducer = (state =initialState, actions:any ) => {
+type ActionsType = {
+
+}
+
+export const quizReducer = (state =initialState, actions:ActionsType ) => {
 
 }
