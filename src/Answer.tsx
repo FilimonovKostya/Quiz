@@ -1,19 +1,32 @@
 import React from "react";
+import {AnswersType, InitialStateType} from "./App";
 
 
 type AnswerPropsType = {
-    answers: string[]
-
+    answers: AnswersType[]
+    state: InitialStateType[]
 }
 
 export const Answer = (props: AnswerPropsType) => {
 
-    const answers = props.answers.map((el, index) => <li key={index} > {el} </li>)
+    const answer = props.answers.map((el, index) => {
 
+        const cheClick = () => {
+
+
+            if (el.isRight) {
+                alert('Right')
+            } else {
+                alert('not right')
+            }
+        }
+
+        return <li key={index} onClick={cheClick}> {el.answer} </li>
+    })
 
     return <div className={'answerContainer'}>
         <ul className={'answers'}>
-            {answers}
+            {answer}
         </ul>
     </div>
 }

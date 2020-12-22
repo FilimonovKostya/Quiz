@@ -4,7 +4,7 @@ import {Question} from './Question';
 import {Answer} from './Answer';
 import {v1} from "uuid";
 
-type AnswersType = {
+export type AnswersType = {
     id: string
     answer: string
     isRight: boolean
@@ -30,7 +30,7 @@ function App() {
     const [state, setState] = useState<InitialStateType[]>([
         {
             id: firstQuestionID, title: 'Что такое React',
-            answers: [
+            answers:  [
                 {
                     id: firstQuestionID,
                     answer: 'Это декларативная, эффективная и гибкая JavaScript библиотека для создания пользовательских интерфейсов.',
@@ -89,6 +89,8 @@ function App() {
 
     ])
 
+    const questions = state[currentValue].title
+    const answers:AnswersType[] = state[currentValue].answers
 
 
     return <div className={'wrapper'}>
@@ -98,8 +100,8 @@ function App() {
                 {
                     state.length <= currentValue
                         ? <h1>{countRightAnswers}</h1>
-                        : <><Question question={state[currentValue].title}/>
-                            <Answer answers={state[currentValue].answers.map(el => el.answer)}/></>
+                        : <><Question question={questions} />
+                            <Answer answers={answers} state={state}/></>
                 }
 
             </React.Fragment>
