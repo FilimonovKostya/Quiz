@@ -1,27 +1,27 @@
 import React from "react";
-import {AnswersType, InitialStateType} from "./App";
+import {AnswersType} from "./App";
 
 
 type AnswerPropsType = {
     answers: AnswersType[]
-    state: InitialStateType[]
+    changeCurrentQuestion: (value: number) => void
+    currentQuestion: number
+    counterRightAnswers: number
+    rightAnswers: (value: number) => void
 }
 
 export const Answer = (props: AnswerPropsType) => {
 
     const answer = props.answers.map((el, index) => {
 
-        const cheClick = () => {
-
-
+        const changeQuestion = () => {
             if (el.isRight) {
-                alert('Right')
-            } else {
-                alert('not right')
+                props.changeCurrentQuestion(props.currentQuestion + 1)
+                props.rightAnswers(props.counterRightAnswers + 1)
             }
         }
 
-        return <li key={index} onClick={cheClick}> {el.answer} </li>
+        return <li key={index} onClick={changeQuestion}> {el.answer} </li>
     })
 
     return <div className={'answerContainer'}>

@@ -30,7 +30,7 @@ function App() {
     const [state, setState] = useState<InitialStateType[]>([
         {
             id: firstQuestionID, title: 'Что такое React',
-            answers:  [
+            answers: [
                 {
                     id: firstQuestionID,
                     answer: 'Это декларативная, эффективная и гибкая JavaScript библиотека для создания пользовательских интерфейсов.',
@@ -89,8 +89,10 @@ function App() {
 
     ])
 
+    console.log(countRightAnswers)
+
     const questions = state[currentValue].title
-    const answers:AnswersType[] = state[currentValue].answers
+    const answers: AnswersType[] = state[currentValue].answers
 
 
     return <div className={'wrapper'}>
@@ -98,10 +100,16 @@ function App() {
 
             <React.Fragment>
                 {
-                    state.length <= currentValue
-                        ? <h1>{countRightAnswers}</h1>
-                        : <><Question question={questions} />
-                            <Answer answers={answers} state={state}/></>
+                    state.length !== currentValue
+                        ? <><Question question={questions}/>
+                            <Answer answers={answers}
+                                    currentQuestion={currentValue}
+                                    changeCurrentQuestion={setCurrentValue}
+                                    rightAnswers={setCountRightAnswers}
+                                    counterRightAnswers={countRightAnswers}
+                            /></>
+                        : <h1>{countRightAnswers}</h1>
+
                 }
 
             </React.Fragment>
