@@ -58,3 +58,8 @@ li{
 .wrong{
     background: red;
 }
+
+h2{
+    text-align: center;
+    color: white;
+}
