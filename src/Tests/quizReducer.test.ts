@@ -72,7 +72,9 @@ test('Change question and answers', () => {
     const endState = quizReducer(startState, changeQuestionAC())
     console.log(endState)
 
-    expect(endState[1].title).toBe('Почему мы используем React')
-    expect(endState[1].answers.map(el => el.answer)).toBe(endState[1].answers.map(el => el.answer))
+    expect(endState[0].title).toBe('Почему мы используем React')
+    expect(endState[0].answers[0].answer).toBe('Так как нет других варинатов')
+    expect(endState[0].answers[1].answer).toBe('Из-за скорости работы ,благодаря Virtual Dom')
+    expect(endState[0].answers[2].answer).toBe('Больше платят и он на хайпе')
 
 })

@@ -80,7 +80,7 @@ export const quizReducer = (state = initialState, actions: ActionsType): Initial
 
     switch (actions.type) {
         case "CHANGE-QUESTION":
-       return  [state[1]]
+            return [state[1]]
         default:
             return state
     }
