@@ -6,13 +6,13 @@ export type AnswersType = {
     isRight: boolean
 }
 
-type InitialStateType = {
+export type InitialStateType = {
     id: string
     title: string
     answers: AnswersType[]
 }
 
-type ActionsType = {}
+type ActionsType = ReturnType<typeof changeQuestionAC>
 
 const initialState: InitialStateType[] = [
     {
@@ -76,6 +76,16 @@ const initialState: InitialStateType[] = [
     },
 ]
 
-export const quizReducer = (state = initialState, actions: ActionsType) => {
-    return state
+export const quizReducer = (state = initialState, actions: ActionsType): InitialStateType[] => {
+
+    switch (actions.type) {
+        case "CHANGE-QUESTION":
+       return  [state[1]]
+        default:
+            return state
+    }
 }
+
+
+//Actions
+export const changeQuestionAC = () => ({type: 'CHANGE-QUESTION'} as const)
