@@ -19,20 +19,16 @@ export type InitialStateType = {
 
 function App() {
 
-    const firstQuestionID = v1()
-    const secondQuestionID = v1()
-    const thirdQuestionID = v1()
-
     const [currentValue, setCurrentValue] = useState<number>(0)
     const [countRightAnswers, setCountRightAnswers] = useState<number>(0)
 
 
     const [state, setState] = useState<InitialStateType[]>([
         {
-            id: firstQuestionID, title: 'Что такое React',
+            id: v1(), title: 'Что такое React',
             answers: [
                 {
-                    id: firstQuestionID,
+                    id: v1(),
                     answer: 'Это декларативная, эффективная и гибкая JavaScript библиотека для создания пользовательских интерфейсов.',
                     isRight: true
                 },
@@ -42,13 +38,14 @@ function App() {
                     isRight: false
                 },
                 {
-                    id: v1(), answer: 'Это вообще язык программирования ',
+                    id: v1(),
+                    answer: 'Это вообще язык программирования ',
                     isRight: false
                 }
             ]
         },
         {
-            id: secondQuestionID, title: 'Почему мы используем React',
+            id: v1(), title: 'Почему мы используем React',
             answers: [
                 {
                     id: v1(),
@@ -56,7 +53,7 @@ function App() {
                     isRight: false
                 },
                 {
-                    id: secondQuestionID,
+                    id: v1(),
                     answer: 'Из-за скорости работы ,благодаря Virtual Dom',
                     isRight: true
                 },
@@ -66,7 +63,7 @@ function App() {
             ]
         },
         {
-            id: thirdQuestionID,
+            id: v1(),
             title: 'Что такое Virtual Dom',
             answers: [
                 {
@@ -80,7 +77,7 @@ function App() {
                     isRight: false
                 },
                 {
-                    id: thirdQuestionID,
+                    id: v1(),
                     answer: "это техника и набор библиотек  алгоритмов, которые позволяют нам улучшить производительность на клиентской стороне",
                     isRight: true
                 }
@@ -89,10 +86,7 @@ function App() {
 
     ])
 
-    console.log(countRightAnswers)
 
-    const questions = state[currentValue].title
-    const answers: AnswersType[] = state[currentValue].answers
 
 
     return <div className={'wrapper'}>
@@ -100,15 +94,17 @@ function App() {
 
             <React.Fragment>
                 {
-                    state.length !== currentValue
-                        ? <><Question question={questions}/>
-                            <Answer answers={answers}
+                    state.length > currentValue
+                        ? <><Question question={state[currentValue].title}/>
+                            <Answer answers={state[currentValue].answers}
                                     currentQuestion={currentValue}
                                     changeCurrentQuestion={setCurrentValue}
                                     rightAnswers={setCountRightAnswers}
                                     counterRightAnswers={countRightAnswers}
+
                             /></>
-                        : <h1>{countRightAnswers}</h1>
+                        : <h1> Правильных ответов  {countRightAnswers} из {state.length}  </h1>
+
 
                 }
 
