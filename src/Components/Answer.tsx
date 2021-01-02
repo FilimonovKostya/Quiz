@@ -1,35 +1,29 @@
 import React from "react";
-import {AnswersType} from "../Redux/quizReducer";
+import {AnswersType, changeQuestionAC} from "../Redux/quizReducer";
+import {useDispatch} from "react-redux";
 
 
 type AnswerPropsType = {
     answers: AnswersType[]
+    counter: number
+    setCounter: (value: number) => void
 }
 
 export const Answer = (props: AnswerPropsType) => {
+    debugger
+    const onClickHandler = () => {
+        dispatch(changeQuestionAC(props.counter))
+        props.setCounter(props.counter + 1)
+    }
 
-    const answers = props.answers.map(el => <li>{el.answer}</li>)
+  const answers = props.answers.map(el => {
+      debugger
+      return <li onClick={onClickHandler}> {el.answer} </li>
+  })
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         props.setTimer(props.timer - 1)
-    //     }, 1000)
-    // }, [props.timer])
 
-    // const answer = props.answers.map((el, index) => {
-    //
-    //     const changeQuestion = () => {
-    //         if (el.isRight) {
-    //             props.changeCurrentQuestion(props.currentQuestion + 1)
-    //             props.rightAnswers(props.counterRightAnswers + 1)
-    //
-    //         } else {
-    //             props.changeCurrentQuestion(props.currentQuestion + 1)
-    //         }
-    //     }
-    //
-    //     return <li key={index} className={el.isRight ? right : wrong} onClick={changeQuestion}> {el.answer} </li>
-    // })
+    const dispatch = useDispatch()
+
 
     return <div className={'answerContainer'}>
         <ul className={'answers'}>

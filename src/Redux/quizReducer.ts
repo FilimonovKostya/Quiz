@@ -80,7 +80,7 @@ export const quizReducer = (state = initialState, actions: ActionsType): Initial
 
     switch (actions.type) {
         case "CHANGE-QUESTION":
-            return [state[1]]
+            return [state[actions.counter]]
         default:
             return state
     }
@@ -88,4 +88,4 @@ export const quizReducer = (state = initialState, actions: ActionsType): Initial
 
 
 //Actions
-export const changeQuestionAC = () => ({type: 'CHANGE-QUESTION'} as const)
+export const changeQuestionAC = (counter:number) => ({type: 'CHANGE-QUESTION',counter} as const)

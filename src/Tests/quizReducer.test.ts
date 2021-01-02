@@ -69,8 +69,7 @@ beforeEach(() => {
 
 test('Change question and answers', () => {
 
-    const endState = quizReducer(startState, changeQuestionAC())
-    console.log(endState)
+    const endState = quizReducer(startState, changeQuestionAC(1))
 
     expect(endState[0].title).toBe('Почему мы используем React')
     expect(endState[0].answers[0].answer).toBe('Так как нет других варинатов')
