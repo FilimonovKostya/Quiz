@@ -77,10 +77,11 @@ const initialState: InitialStateType[] = [
 ]
 
 export const quizReducer = (state = initialState, actions: ActionsType): InitialStateType[] => {
-
     switch (actions.type) {
         case "CHANGE-QUESTION":
-            return [state[actions.counter]]
+            const copyState = [...state]
+
+            return [copyState[actions.counter]]
         default:
             return state
     }
