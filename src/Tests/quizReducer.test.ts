@@ -1,4 +1,4 @@
-import {changeQuestionAC, InitialStateType, quizReducer} from "../Redux/quizReducer";
+import {setQuestionsAC, InitialStateType, quizReducer} from "../Redux/quizReducer";
 import {v1} from "uuid";
 
 
@@ -69,7 +69,7 @@ beforeEach(() => {
 
 test('Change question and answers', () => {
 
-    const endState = quizReducer(startState, changeQuestionAC(1))
+    const endState = quizReducer(startState, setQuestionsAC(1))
 
     expect(endState[0].title).toBe('Почему мы используем React')
     expect(endState[0].answers[0].answer).toBe('Так как нет других варинатов')
