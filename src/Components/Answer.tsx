@@ -2,20 +2,20 @@ import React from "react";
 
 
 type AnswerPropsType = {
-    answers:string[]
-    setCounter:(value:number) => void
-    counter:number
+    allAnswers: string[]
+    changeData: (value: number) => void
+    totalCounter: number
 }
 
 export const Answer = (props: AnswerPropsType) => {
 
     const onClickHandler = () => {
-        props.setCounter( props.counter + 1)
+        props.changeData(props.totalCounter + 1)
     }
 
     return <div className={'answerContainer'}>
         <ul className={'answers'}>
-            {props.answers.map((el, index) => <li key={index} onClick={onClickHandler}>{el}</li>)}
+            {props.allAnswers.map((el, index) => <li key={index} onClick={onClickHandler}> {el} </li>)}
         </ul>
     </div>
 }

@@ -33,33 +33,40 @@ type ResponsType = {
 function App() {
 
     const [questions, setQuestions] = useState<string[]>([])
-    const [answers, setAnswers] = useState<string[][]>([])
-    const [counter, setCounter] = useState<number>(0)
+    const [totalCount, setTotalCount] = useState<number>(0)
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [all, setAll] = useState<string[]>([])
 
     useEffect(() => {
         getQuestions().getAPI()
             .then((res) => {
+
                 setQuestions(res.data.results.map(el => el.question))
+                const rightAnswers = res.data.results.map(el => el.correct_answer)
                 const answers = res.data.results.map(el => el.incorrect_answers)
-                setAnswers(answers)
-                console.log(answers[0])
+                setAll([...[...answers][totalCount], [...rightAnswers][totalCount]].sort(() => Math.random() - 0.5))
+
                 setIsLoading(true)
             })
             .catch(error => {
-
+                throw Error(' Ошибочка какая-то')
             })
-    }, [])
+    }, [totalCount])
 
-    if(!isLoading){
+
+    if (!isLoading) {
         return <h1>Waiting</h1>
     }
 
     return <div className={'wrapper'}>
         <div className={'container'}>
             <React.Fragment>
-                <Question question={questions[counter]}/>
-                <Answer answers={answers[counter]} counter={counter} setCounter={setCounter}/>
+                {
+                    totalCount>= 10
+                        ? <h1>Кончились вопросы</h1>
+                        : <><Question question={questions[totalCount]}/>
+                            <Answer allAnswers={all} changeData={setTotalCount} totalCounter={totalCount}/></>
+                }
             </React.Fragment>
         </div>
     </div>
