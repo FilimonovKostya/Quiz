@@ -10,27 +10,6 @@ type AnswerPropsType = {
     rightAnswers: string
 }
 
-// export const Answer = (props: AnswerPropsType) => {
-//     const dispatch = useDispatch()
-//
-//     return <div className={'answerContainer'}>
-//         <ul className={'answers'}>
-//             {
-//                 props.answers.map((el, index) => {
-//                     const onClickHandler = () => {
-//                         dispatch(changeTotalCounterAC(props.totalCounter + 1))
-//                         if (el === props.rightAnswers) {
-//                             dispatch(counterRightAnswerAC(props.counterRightAnswers + 1))
-//                         }
-//                     }
-//                     return <li key={index} onClick={onClickHandler}> {el} </li>
-//                 })
-//             }
-//         </ul>
-//     </div>
-// }
-
-
 export const Answer = (props: AnswerPropsType) => {
     const dispatch = useDispatch()
     const [inputAnswer,setInputAnswer] = useState('')

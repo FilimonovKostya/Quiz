@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getQuestions} from "./Api/api";
 import {getQuestionTC} from "./Redux/quizReducer";
 import {RootStoreType} from "./Redux/store";
+import Preloader from "./Components/Preloader";
 
 
 // запуск теста по кнопке;
@@ -34,9 +35,8 @@ function App() {
 
 
     if (!isLoading) {
-        return <h1 style={{textAlign: 'center', color: 'White'}}> Waiting </h1>
+        return <Preloader />
     }
-
 
     return <div className="container">
         <div className="heading">
@@ -45,10 +45,14 @@ function App() {
 
         <div className="quiz">
             <div className="quiz-form__quiz">
-                <Question questions={questions[totalCounter]}/>
-                <Answer answers={unionAnswers} counterRightAnswers={counterRightAnswers} rightAnswers={rightAnswers[totalCounter]} totalCounter={totalCounter}/>
-            <h1> Total Counter {totalCounter}</h1>
-            <h1> Right Counter {counterRightAnswers}</h1>
+                {totalCounter !== questions.length
+                    ? <>
+                        <Question questions={questions[totalCounter]}/>
+                        <Answer answers={unionAnswers} counterRightAnswers={counterRightAnswers} rightAnswers={rightAnswers[totalCounter]}
+                                totalCounter={totalCounter}/>
+                    </>
+                    : <h1 style={{textAlign: "center"}}>Всего ответили правильно на {counterRightAnswers} из {totalCounter}</h1>
+                }
             </div>
         </div>
     </div>
