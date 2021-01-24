@@ -3,7 +3,9 @@ import {getQuestions} from "../Api/api";
 
 type ActionsType =
     | ReturnType<typeof setQuestionsAC>
-    | ReturnType<typeof setLoadStatus>
+    | ReturnType<typeof setLoadStatusAC>
+    | ReturnType<typeof changeTotalCounterAC>
+    | ReturnType<typeof counterRightAnswerAC>
 
 export type ResponseType = {
     results: ResultsType[]
@@ -34,6 +36,10 @@ export const quizReducer = (state = initialState, actions: ActionsType): Respons
             return {...state, results: actions.dataResponse}
         case "SET-LOADING-STATUS":
             return {...state, isLoading: actions.isLoading}
+        case "CHANGE-TOTAL-COUNTER":
+            return {...state, totalCounter: actions.counter}
+        case "CHANGE-RIGHT-COUNTER":
+            return {...state, counterRightAnswers: actions.counter}
         default:
             return state
     }
@@ -41,13 +47,14 @@ export const quizReducer = (state = initialState, actions: ActionsType): Respons
 
 
 export const setQuestionsAC = (dataResponse: ResultsType[]) => ({type: 'SET-QUESTIONS', dataResponse} as const)
-export const setLoadStatus = (isLoading: boolean) => ({type: 'SET-LOADING-STATUS', isLoading} as const)
+export const setLoadStatusAC = (isLoading: boolean) => ({type: 'SET-LOADING-STATUS', isLoading} as const)
+export const changeTotalCounterAC = (counter: number) => ({type: 'CHANGE-TOTAL-COUNTER', counter} as const)
+export const counterRightAnswerAC = (counter: number) => ({type: 'CHANGE-RIGHT-COUNTER', counter} as const)
 
 export const getQuestionTC = (dataResponse: ResultsType[]) => (dispatch: Dispatch<ActionsType>) => {
     getQuestions().getAPI()
         .then((res) => {
-            console.log(res)
             dispatch(setQuestionsAC(dataResponse))
-            dispatch(setLoadStatus(true))
+            dispatch(setLoadStatusAC(true))
         })
 }
