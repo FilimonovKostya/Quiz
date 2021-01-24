@@ -1,12 +1,9 @@
 import React from "react";
 
 type QuestionPropsType = {
-    questions:string
+    questions: string
 }
 
-export const Question = (props:QuestionPropsType) => {
-    return <div className={'questionContainer'}>
-        <h1>Question</h1>
-        <h2> {props.questions} </h2>
-    </div>
+export const Question = (props: QuestionPropsType) => {
+    return <p className="quiz-form__question">{props.questions}</p>
 }

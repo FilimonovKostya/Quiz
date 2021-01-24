@@ -37,21 +37,20 @@ function App() {
         return <h1 style={{textAlign: 'center', color: 'White'}}> Waiting </h1>
     }
 
-    return <div className={'wrapper'}>
-        <div className={'container'}>
-            <React.Fragment>
-                <Question questions={questions[totalCounter]}/>
-                <Answer answers={unionAnswers}
-                        totalCounter={totalCounter}
-                        counterRightAnswers={counterRightAnswers}
-                        rightAnswers={rightAnswers[totalCounter]}
-                />
 
-            </React.Fragment>
-
+    return <div className="container">
+        <div className="heading">
+            <h1 className="heading__text">Quiz</h1>
         </div>
-        <h1>Total counter : {totalCounter}</h1>
-        <h1>Counter right Answers : {counterRightAnswers}</h1>
+
+        <div className="quiz">
+            <div className="quiz-form__quiz">
+                <Question questions={questions[totalCounter]}/>
+                <Answer answers={unionAnswers} counterRightAnswers={counterRightAnswers} rightAnswers={rightAnswers[totalCounter]} totalCounter={totalCounter}/>
+            <h1> Total Counter {totalCounter}</h1>
+            <h1> Right Counter {counterRightAnswers}</h1>
+            </div>
+        </div>
     </div>
 }
 
